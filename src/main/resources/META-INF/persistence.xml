@@ -15,7 +15,7 @@
 <!-- 			<property -->
 <!-- 				name="javax.persistence.schema-generation.database.action" -->
 <!-- 				value="none" /> -->
-			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+			<property name="javax.persistence.schema-generation.database.action" value="none"/>
 			<property name="javax.persistence.sql-load-script-source"
 				value="/sql/establishDB.sql" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

@@ -43,9 +43,9 @@ public class ArticleDao {
 		entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
 	}
 	
-	public List<Article> getLastFiveArticles(Article entity) {
-		Query query = entityManager.createQuery("SELECT a FROM articles a ORDER BY id DESC LIMIT 5");
-		List<Article> lastFive= query.getResultList();
+	public List<Article> getLastFiveArticles() {
+		Query query = entityManager.createQuery("SELECT a FROM Article a ORDER BY a.id DESC");
+		List<Article> lastFive = query.setMaxResults(5).getResultList();
 		return lastFive;
 	}
 }

@@ -84,7 +84,7 @@ public class ArticleController {
 		articleDao.deleteArticle(articleDao.readArticle(id));
 		return "redirect:/article/list";
 	}
-
+	
 	// utils
 	
 	//java.utils.Date version
