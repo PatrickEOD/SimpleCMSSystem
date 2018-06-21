@@ -2,6 +2,7 @@ package mvc.controller;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,7 @@ public class ArticleController {
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute Article article) {
 		article.setUpdated(getActualDate());
+//		System.out.println("=========================" + article.getCreated());
 		articleDao.updateArticle(article);
 		return "redirect:/article/list";
 	}
@@ -88,22 +90,24 @@ public class ArticleController {
 	// utils
 	
 	//java.utils.Date version
-	private Date getActualDate() {
-		java.util.Date dt = new java.util.Date();
-		java.util.Date newdt = new java.util.Date();
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String currentTime = sdf.format(dt);
-		try {
-			newdt = sdf.parse(currentTime);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return newdt;
-	}
+//	private Date getActualDate() {
+//		java.util.Date dt = new java.util.Date();
+//		java.util.Date newdt = new java.util.Date();
+//		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		String currentTime = sdf.format(dt);
+//		try {
+//			newdt = sdf.parse(currentTime);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return newdt;
+//	}
 	
 	//timestamp version
-//	private Timestamp getActualDate() {
+	private Timestamp getActualDate() {
+		LocalDateTime ldt = LocalDateTime.now();
 //		java.util.Date dt = new java.util.Date();
+//		java.util.Date newdt = new java.util.Date();
 //		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		String currentTime = sdf.format(dt);
 //		try {
@@ -113,5 +117,6 @@ public class ArticleController {
 //		}
 //		return newdt;
 //		return Timestamp.valueOf(currentTime);
-//	}
+		return Timestamp.valueOf(ldt);
+	}
 }

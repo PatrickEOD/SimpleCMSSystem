@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -47,5 +48,13 @@ public class ArticleDao {
 		Query query = entityManager.createQuery("SELECT a FROM Article a ORDER BY a.id DESC");
 		List<Article> lastFive = query.setMaxResults(5).getResultList();
 		return lastFive;
+	}
+	
+	public List<Article> getListByCategory(Long id) {
+//		Query query = entityManager.createQuery("SELECT a FROM Article a INNER JOIN a.articles_categories b WHERE b.category_id =:id");
+		Query query = entityManager.createNativeQuery("SELECT * FROM articles INNER JOIN articles_categories ON " 
+				+ "articles.id = articles_categories.Article_id WHERE articles_categories.category_id = ?1", Article.class);
+		query.setParameter(1, id);
+		return query.getResultList();
 	}
 }

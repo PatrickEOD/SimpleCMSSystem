@@ -1,5 +1,6 @@
 package mvc.entity;
 
+import java.sql.Timestamp;
 //import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -32,14 +33,14 @@ public class Article {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Category> category;
 	private String content;
-	@Column(name = "created", columnDefinition="DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-//	private Timestamp created;
-	 private Date created;
-	@Column(name = "updated", columnDefinition="DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-//	private Timestamp updated;
-	private Date updated;
+	@Column(name = "created", columnDefinition = "DATETIME", updatable = false, nullable = false)
+//	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp created;
+//	private Date created;
+	@Column(name = "updated", columnDefinition = "DATETIME")
+//	@Temporal(TemporalType.TIMESTAMP)
+	private Timestamp updated;
+//	private Date updated;
 
 	@Override
 	public String toString() {
@@ -87,37 +88,37 @@ public class Article {
 		this.content = content;
 	}
 
-//	public Timestamp getCreated() {
-//		return created;
-//	}
-//
-//	public void setCreated(Timestamp created) {
-//		this.created = created;
-//	}
-//
-//	public Timestamp getUpdated() {
-//		return updated;
-//	}
-//
-//	public void setUpdated(Timestamp updated) {
-//		this.updated = updated;
-//	}
-
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(Timestamp updated) {
 		this.updated = updated;
 	}
+
+//	public Date getCreated() {
+//		return created;
+//	}
+
+//	public void setCreated(Date created) {
+//		this.created = created;
+//	}
+
+//	public Date getUpdated() {
+//		return updated;
+//	}
+
+//	public void setUpdated(Date updated) {
+//		this.updated = updated;
+//	}
 
 	//to do:
 	//

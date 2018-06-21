@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>List Articles</title>
+<title>List By Categories</title>
 </head>
 <body>
-<h1>List of Articles</h1>
+<h1>List of articles by categories:</h1>
 <table>
 	<tr>
 		<th>ID</th>
@@ -19,9 +19,8 @@
 		<th>Content</th>
 		<th>Created</th>
 		<th>Updated</th>
-		
 	</tr>
-	<c:forEach items="${article}" var="a">
+	<c:forEach items="${categoryList}" var="a">
 		<tr>
 			<td>${a.id}</td>
 			<td>${a.title}</td>
@@ -40,7 +39,5 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href='<c:url value="/article/add"/>'>Add Article</a>
-
 </body>
 </html>
