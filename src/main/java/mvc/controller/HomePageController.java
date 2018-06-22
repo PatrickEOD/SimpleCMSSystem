@@ -36,7 +36,6 @@ public class HomePageController {
 	@GetMapping("/")
 	public String getLastFive(Model model) {
 		model.addAttribute("listLast5", articleDao.getLastFiveArticles());
-		System.out.println("===========================!!!!!!!!!!!!==================================" + articleDao.getLastFiveArticles().toString());
 		return "homePage/homePage";
 	}
 	
@@ -48,7 +47,6 @@ public class HomePageController {
 	@GetMapping("/listByCategories/{id}")
 	public String getListByCategories(Model model, @PathVariable Long id) {
 		model.addAttribute("categoryList", articleDao.getListByCategory(id));
-		System.out.println("====================================================================" + articleDao.getListByCategory(id).toString());
 		return "homePage/listByCategories";
 	}
 }
