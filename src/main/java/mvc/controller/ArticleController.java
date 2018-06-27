@@ -1,20 +1,19 @@
 package mvc.controller;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import mvc.dao.ArticleDao;
 import mvc.dao.AuthorDao;
@@ -55,7 +54,10 @@ public class ArticleController {
 	}
 
 	@PostMapping("/add")
-	public String add(@ModelAttribute Article article) {
+	public String add(@Validated @ModelAttribute Article article, BindingResult result) {
+		if(result.hasErrors()) {
+			return "article/add";
+		}
 		article.setCreated(getActualDate());
 		articleDao.createArticle(article);
 		return "redirect:/article/list";
@@ -74,7 +76,10 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute Article article) {
+	public String edit(@Validated @ModelAttribute Article article, BindingResult result) {
+		if(result.hasErrors()) {
+			return "article/list";
+		}
 		article.setUpdated(getActualDate());
 //		System.out.println("=========================" + article.getCreated());
 		articleDao.updateArticle(article);

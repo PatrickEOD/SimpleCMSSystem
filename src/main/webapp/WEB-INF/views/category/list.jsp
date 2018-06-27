@@ -25,6 +25,7 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href="<c:url value="/category/add"/>">Add category</a>
+<a href="<c:url value="/category/add"/>">Add category</a><br/>
+<a href="<c:url value="/home/"/>">Home Page</a>
 </body>
 </html>

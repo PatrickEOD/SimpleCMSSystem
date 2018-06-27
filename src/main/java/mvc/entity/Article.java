@@ -1,8 +1,6 @@
 package mvc.entity;
 
 import java.sql.Timestamp;
-//import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,8 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "articles")
@@ -26,12 +25,15 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 200)
+	@Size(min = 1, max = 200)
 	private String title;
 	@ManyToOne
 	@JoinColumn(name = "authors_id")
 	private Author author;
 	@ManyToMany(fetch = FetchType.EAGER)
+	@NotEmpty
 	private List<Category> category;
+	@Size(min = 500, max = 4000)
 	private String content;
 	@Column(name = "created", columnDefinition = "DATETIME", updatable = false, nullable = false)
 //	@Temporal(TemporalType.TIMESTAMP)

@@ -26,7 +26,8 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href='<c:url value="/author/add"/>'>Add Author</a>
+<a href='<c:url value="/author/add"/>'>Add Author</a><br/>
+<a href="<c:url value="/home/"/>">Home Page</a>
 
 </body>
 </html>

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "authors")
 public class Author {
@@ -17,7 +19,9 @@ public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String lastName;
 	
 	@OneToMany(mappedBy="author", cascade = CascadeType.ALL)

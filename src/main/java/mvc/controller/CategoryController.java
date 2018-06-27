@@ -3,6 +3,8 @@ package mvc.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,10 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/add")
-	public String add(@ModelAttribute Category category, Model model) {
+	public String add(@Validated @ModelAttribute Category category, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "category/add";
+		}
 		categoryDao.createCategory(category);
 		return "redirect:/category/list";
 	}
@@ -49,7 +54,10 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute Category category) {
+	public String edit(@Validated @ModelAttribute Category category, BindingResult result) {
+		if(result.hasErrors()) {
+			return "category/list";
+		}
 		categoryDao.updateCategory(category);
 		return "redirect:/category/list";
 	}

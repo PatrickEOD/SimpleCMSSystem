@@ -39,5 +39,7 @@
 		</tr>
 	</c:forEach>
 </table>
+<br/>
+<a href="<c:url value="/home/"/>">Home Page</a>
 </body>
 </html>

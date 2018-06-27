@@ -40,7 +40,8 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href='<c:url value="/article/add"/>'>Add Article</a>
+<a href='<c:url value="/article/add"/>'>Add Article</a><br/>
+<a href="<c:url value="/home/"/>">Home Page</a>
 
 </body>
 </html>

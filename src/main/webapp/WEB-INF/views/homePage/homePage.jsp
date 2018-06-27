@@ -10,6 +10,7 @@
 <title>Home Page</title>
 </head>
 <body>
+<div>
 	<h1>Home Page</h1>
 	<h3>5 last added articles</h3>
 	<table>
@@ -29,25 +30,35 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href='<c:url value="/article/add"/>'>Add Article</a>
-	<a href='<c:url value="/article/list"/>'>Articles list</a>
-
-<h1>Article categories:</h1>
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Description</th>
-	</tr>
-	<c:forEach items="${categories}" var="b">
+<%-- 	<a href='<c:url value="/article/add"/>'>Add Article</a> --%>
+<%-- 	<a href='<c:url value="/article/list"/>'>Articles list</a> --%>
+</div>
+<br/>
+<div>
+	<h1>Article categories:</h1>
+	<table>
 		<tr>
-			<td>${b.name}</td>
-			<td>${b.description}</td>
-			<td>
-				<a href='<c:url value="/home/listByCategories/${b.id}"/>'>Search articles</a>
-			</td>
+			<th>Name</th>
+			<th>Description</th>
 		</tr>
-	</c:forEach>
-</table>
+		<c:forEach items="${categories}" var="b">
+			<tr>
+				<td>${b.name}</td>
+				<td>${b.description}</td>
+				<td>
+					<a href='<c:url value="/home/listByCategories/${b.id}"/>'>Search articles</a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
+<div>
+	<h3>Available links:</h3>
+	<a href='<c:url value="/article/list"/>'>Articles</a><br/>
+	<a href='<c:url value="/category/list"/>'>Categories</a><br/>
+	<a href='<c:url value="/author/list"/>'>Authors</a>
+</div>
+
 <%-- 	<form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/home/" modelAttribute="categories"> --%>
 <!-- 		Get list of articles from categories:<br /> -->
 <%-- 		<form:select itemLabel="name" itemValue="id" path="category" --%>
