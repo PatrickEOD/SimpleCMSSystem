@@ -19,6 +19,7 @@
 		<th>Content</th>
 		<th>Created</th>
 		<th>Updated</th>
+		<th>Draft</th>
 		
 	</tr>
 	<c:forEach items="${article}" var="a">
@@ -34,6 +35,7 @@
 			<td>${a.content}</td>
 			<td><fmt:formatDate value="${a.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			<td><fmt:formatDate value="${a.updated}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			<td>${a.draft}</td>
 			
 			<td><a href='<c:url value="/article/edit/${a.id}"/>'>Edit article</a>
 				<a href='<c:url value="/article/delete/${a.id}"/>'>Delete article</a></td>

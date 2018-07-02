@@ -17,6 +17,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import mvc.validators.ContentSize;
+import mvc.validators.ValidationGroupArticles;
+import mvc.validators.ValidationGroupDrafts;
+
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -25,29 +29,31 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 200)
-	@Size(min = 1, max = 200)
+	@Size(min = 1, max = 200, groups = {ValidationGroupArticles.class, ValidationGroupDrafts.class})
 	private String title;
 	@ManyToOne
 	@JoinColumn(name = "authors_id")
 	private Author author;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@NotEmpty
+	@NotEmpty (groups = ValidationGroupArticles.class)
 	private List<Category> category;
-	@Size(min = 500, max = 4000)
+	// @Size(min = 500, max = 4000)
+	@ContentSize(min = 20, max = 4000, groups = {ValidationGroupArticles.class, ValidationGroupDrafts.class})
 	private String content;
 	@Column(name = "created", columnDefinition = "DATETIME", updatable = false, nullable = false)
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp created;
-//	private Date created;
+	// private Date created;
 	@Column(name = "updated", columnDefinition = "DATETIME")
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Timestamp updated;
-//	private Date updated;
+	// private Date updated;
+	private boolean draft = false;
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", author=" + author + ", category=" + category + ", content="
-				+ content + ", created=" + created + ", updated=" + updated + "]";
+				+ content + ", created=" + created + ", updated=" + updated + ", draft=" + draft + "]";
 	}
 
 	public Long getId() {
@@ -106,24 +112,33 @@ public class Article {
 		this.updated = updated;
 	}
 
-//	public Date getCreated() {
-//		return created;
-//	}
+	public boolean isDraft() {
+		return draft;
+	}
 
-//	public void setCreated(Date created) {
-//		this.created = created;
-//	}
+	public void setDraft(boolean draft) {
+		this.draft = draft;
+	}
 
-//	public Date getUpdated() {
-//		return updated;
-//	}
+	// public Date getCreated() {
+	// return created;
+	// }
 
-//	public void setUpdated(Date updated) {
-//		this.updated = updated;
-//	}
+	// public void setCreated(Date created) {
+	// this.created = created;
+	// }
 
-	//to do:
+	// public Date getUpdated() {
+	// return updated;
+	// }
+
+	// public void setUpdated(Date updated) {
+	// this.updated = updated;
+	// }
+
+	// to do:
 	//
-	//to fix: 
-	//	enable whole date and time to be able to save during update and creating new instance of entity in db
+	// to fix:
+	// enable whole date and time to be able to save during update and creating new
+	// instance of entity in db
 }

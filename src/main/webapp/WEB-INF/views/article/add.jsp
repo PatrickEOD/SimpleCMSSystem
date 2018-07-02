@@ -13,7 +13,8 @@
 <form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/article/add" modelAttribute="article">
 	<form:hidden path="id"/>
 	Title:
-	<form:input type="text" path="title"/><br/>
+	<form:input type="text" path="title"/>
+	<form:errors path="title"/><br/>
 	Author:
 	<form:select itemLabel="lastName" itemValue="id" path="author.id"
 		items="${authors}"/><br/> 
@@ -21,8 +22,11 @@
 	<form:select itemLabel="name" itemValue="id" path="category"
 		items="${categories}" multiple="true"/><br/>
 	Content:
-	<form:input type="text" path="content"/><br/>
-		
+	<form:input type="text" path="content"/>
+	<form:errors path="content"/><br/>
+	Draft:
+	<form:radiobutton path="draft" value="true"/><br/>
+	
 	<input type="submit" value="save"/>
 </form:form>
 <br/>
