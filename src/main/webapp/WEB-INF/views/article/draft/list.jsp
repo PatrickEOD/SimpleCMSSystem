@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>List Articles</title>
+<title>List of Drafts</title>
 </head>
 <body>
-<h1>List of Articles</h1>
+<h1>List of articles drafts</h1>
 <table>
 	<tr>
 		<th>ID</th>
@@ -22,7 +22,7 @@
 		<th>Draft</th>
 		
 	</tr>
-	<c:forEach items="${article}" var="a">
+	<c:forEach items="${draft}" var="a">
 		<tr>
 			<td>${a.id}</td>
 			<td>${a.title}</td>
@@ -37,14 +37,14 @@
 			<td><fmt:formatDate value="${a.updated}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			<td>${a.draft}</td>
 			
-			<td><a href='<c:url value="/article/edit/${a.id}"/>'>Edit article</a>
-				<a href='<c:url value="/article/delete/${a.id}"/>'>Delete article</a></td>
+			<td><a href='<c:url value="/draft/edit/${a.id}"/>'>Edit draft</a>
+				<a href='<c:url value="/draft/delete/${a.id}"/>'>Delete draft</a></td>
 		</tr>
 	</c:forEach>
 </table>
-<a href='<c:url value="/article/add"/>'>Add Article</a><br/>
 <a href='<c:url value="/draft/add"/>'>Add article draft</a><br/>
-<a href='<c:url value="/draft/list"/>'>Drafts</a><br/>
+<a href='<c:url value="/article/add"/>'>Add Article</a><br/>
+<a href='<c:url value="/article/list"/>'>Articles</a><br/>
 <a href="<c:url value="/home/"/>">Home Page</a>
 
 </body>

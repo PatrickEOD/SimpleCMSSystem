@@ -54,10 +54,11 @@ public class ArticleController {
 	}
 
 	@PostMapping("/add")
-	public String add(@Validated @ModelAttribute Article article, BindingResult result) {
+	public String add(@Validated @ModelAttribute (name = "article") Article article, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/add";
 		}
+//		article.setDraft(false);
 		article.setCreated(getActualDate());
 		articleDao.createArticle(article);
 		return "redirect:/article/list";
@@ -65,7 +66,7 @@ public class ArticleController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("article", articleDao.readAllArticles());
+		model.addAttribute("article", articleDao.readOnlyArticles());
 		return "article/list";
 	}
 
@@ -76,7 +77,7 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@Validated @ModelAttribute Article article, BindingResult result) {
+	public String edit(@Validated @ModelAttribute (name = "article") Article article, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/list";
 		}

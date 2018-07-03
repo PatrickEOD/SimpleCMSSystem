@@ -10,26 +10,26 @@
 </head>
 <body>
 <h1>Edit Article</h1>
-<form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/article/edit" modelAttribute="article">
+<form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/article/draft/edit" modelAttribute="draft">
 	<form:hidden path="id"/>
 	Title:
 	<form:input type="text" path="title"/>
 	<form:errors path="title"/><br/>
-	Author:
-	<form:select itemLabel="firstName" itemValue="id" path="author.id"
-		items="${authors}"/><br/>
-	Categories:
-	<form:select itemLabel="name" itemValue="id" path="category"
-		items="${categories}" multiple="true"/><br/>
+<!-- 	Author: -->
+<%-- 	<form:select itemLabel="firstName" itemValue="id" path="author.id" --%>
+<%-- 		items="${authors}"/><br/> --%>
+<!-- 	Categories: -->
+<%-- 	<form:select itemLabel="name" itemValue="id" path="category" --%>
+<%-- 		items="${categories}" multiple="true"/><br/> --%>
 	Content:
 	<form:input type="text" path="content"/>
 	<form:errors path="content"/><br/>
-	Set to draft:
+	Keep as a draft:
 	<form:radiobutton path="draft" value="true"/><br/>
 		
 	<input type="submit" value="save"/>
 </form:form>
 <br/>
-<a href='<c:url value="/article/list"/>'>Articles</a>
+<a href='<c:url value="/draft/list"/>'>Drafts</a>
 </body>
 </html>

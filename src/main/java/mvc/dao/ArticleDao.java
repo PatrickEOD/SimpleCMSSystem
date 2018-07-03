@@ -57,4 +57,14 @@ public class ArticleDao {
 		query.setParameter(1, id);
 		return query.getResultList();
 	}
+	
+	public List<Article> readOnlyArticles() {
+		Query query = entityManager.createQuery("SELECT a FROM Article a WHERE a.draft = false");
+		return query.getResultList();
+	}
+	
+	public List<Article> readOnlyDrafts() {
+		Query query = entityManager.createQuery("SELECT a FROM Article a WHERE a.draft = true");
+		return query.getResultList();
+	}
 }

@@ -14,15 +14,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.group.GroupSequenceProvider;
 
+import mvc.validators.ArticleSequenceProvider;
 import mvc.validators.ContentSize;
 import mvc.validators.ValidationGroupArticles;
 import mvc.validators.ValidationGroupDrafts;
 
 @Entity
 @Table(name = "articles")
+@GroupSequenceProvider(value = ArticleSequenceProvider.class)
 public class Article {
 
 	@Id
@@ -31,11 +35,11 @@ public class Article {
 	@Column(length = 200)
 	@Size(min = 1, max = 200, groups = {ValidationGroupArticles.class, ValidationGroupDrafts.class})
 	private String title;
-	@ManyToOne
-	@JoinColumn(name = "authors_id")
+	@ManyToOne (optional = true)
+	@JoinColumn(name = "authors_id", nullable = true)
 	private Author author;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@NotEmpty (groups = ValidationGroupArticles.class)
+	@NotEmpty (groups = {ValidationGroupArticles.class})
 	private List<Category> category;
 	// @Size(min = 500, max = 4000)
 	@ContentSize(min = 20, max = 4000, groups = {ValidationGroupArticles.class, ValidationGroupDrafts.class})

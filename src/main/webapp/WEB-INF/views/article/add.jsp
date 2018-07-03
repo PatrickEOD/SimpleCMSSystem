@@ -16,16 +16,19 @@
 	<form:input type="text" path="title"/>
 	<form:errors path="title"/><br/>
 	Author:
-	<form:select itemLabel="lastName" itemValue="id" path="author.id"
-		items="${authors}"/><br/> 
+	<form:select path="author.id">
+<%-- 		<form:option value="-" label="--Choose author--" selected="true"/> --%>
+		<form:options itemLabel="lastName" itemValue="id" items="${authors}"/>
+	</form:select><br/>
 	Categories:
 	<form:select itemLabel="name" itemValue="id" path="category"
-		items="${categories}" multiple="true"/><br/>
+		items="${categories}" multiple="true"/>
+	<form:errors path="category"/><br/>
 	Content:
 	<form:input type="text" path="content"/>
 	<form:errors path="content"/><br/>
-	Draft:
-	<form:radiobutton path="draft" value="true"/><br/>
+<!-- 	Set as draft: -->
+<%-- 	<form:radiobutton path="draft" value="true"/><br/> --%>
 	
 	<input type="submit" value="save"/>
 </form:form>
