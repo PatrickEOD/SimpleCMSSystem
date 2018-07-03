@@ -2,6 +2,7 @@ package mvc.controller;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,12 +80,12 @@ public class DraftController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@Validated @ModelAttribute (name = "draft") Article article, BindingResult result) {
+	public String edit(@Validated @ModelAttribute (name = "draft") Article draft, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/draft/list";
 		}
-		article.setUpdated(getActualDate());
-		articleDao.updateArticle(article);
+		draft.setUpdated(getActualDate());
+		articleDao.updateArticle(draft);
 		return "redirect:/draft/list";
 	}
 

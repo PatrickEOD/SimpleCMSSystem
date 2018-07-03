@@ -14,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.validation.groups.Default;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.group.GroupSequenceProvider;
@@ -35,8 +34,9 @@ public class Article {
 	@Column(length = 200)
 	@Size(min = 1, max = 200, groups = {ValidationGroupArticles.class, ValidationGroupDrafts.class})
 	private String title;
-	@ManyToOne (optional = true)
-	@JoinColumn(name = "authors_id", nullable = true)
+	@ManyToOne
+//	@JoinColumn(name = "authors_id", nullable = true)
+//	@Column(nullable = true)
 	private Author author;
 	@ManyToMany(fetch = FetchType.EAGER)
 	@NotEmpty (groups = {ValidationGroupArticles.class})

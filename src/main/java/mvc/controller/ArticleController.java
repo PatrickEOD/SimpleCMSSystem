@@ -88,7 +88,8 @@ public class ArticleController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteArticle(@PathVariable long id) {
+	public String deleteArticle(@PathVariable Long id) {
+		articleDao.deleteAssociationWithCategories(id);
 		articleDao.deleteArticle(articleDao.readArticle(id));
 		return "redirect:/article/list";
 	}

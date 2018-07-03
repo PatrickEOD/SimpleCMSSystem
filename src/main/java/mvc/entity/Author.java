@@ -24,7 +24,8 @@ public class Author {
 	@NotBlank
 	private String lastName;
 	
-	@OneToMany(mappedBy="author", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy="author", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="author")
 	private List<Article> articles;
 	
 

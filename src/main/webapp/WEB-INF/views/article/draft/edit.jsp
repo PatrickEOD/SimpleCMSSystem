@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>Edit Article</h1>
-<form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/article/draft/edit" modelAttribute="draft">
+<form:form method="post" action="http://localhost:8080/WAR_JEE_W02_Hibernate_SpringCMS/draft/edit" modelAttribute="draft">
 	<form:hidden path="id"/>
 	Title:
 	<form:input type="text" path="title"/>
@@ -25,7 +25,7 @@
 	<form:input type="text" path="content"/>
 	<form:errors path="content"/><br/>
 	Keep as a draft:
-	<form:radiobutton path="draft" value="true"/><br/>
+	<form:radiobutton path="draft" value="false"/><br/>
 		
 	<input type="submit" value="save"/>
 </form:form>
