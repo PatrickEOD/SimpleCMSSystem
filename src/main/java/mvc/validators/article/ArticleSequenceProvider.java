@@ -1,4 +1,4 @@
-package mvc.validators;
+package mvc.validators.article;
 
 import java.util.ArrayList;
 import java.util.List;

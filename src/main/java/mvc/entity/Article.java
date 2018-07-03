@@ -19,10 +19,10 @@ import javax.validation.groups.Default;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
-import mvc.validators.ArticleSequenceProvider;
 import mvc.validators.ContentSize;
-import mvc.validators.ValidationGroupArticles;
-import mvc.validators.ValidationGroupDrafts;
+import mvc.validators.article.ArticleSequenceProvider;
+import mvc.validators.article.ValidationGroupArticles;
+import mvc.validators.article.ValidationGroupDrafts;
 
 @Entity
 @Table(name = "articles")
