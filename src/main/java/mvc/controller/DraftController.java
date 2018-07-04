@@ -80,11 +80,18 @@ public class DraftController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@Validated({ValidationGroupDrafts.class}) @ModelAttribute (name = "draft") Article draft, BindingResult result) {
+	public String edit(@Validated({ValidationGroupDrafts.class}) @ModelAttribute (name = "draft") Article draft, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "article/draft/list";
 		}
+		
 		draft.setUpdated(getActualDate());
+		
+		if(!draft.isDraft()) {
+			model.addAttribute("article", draft);
+			return "article/edit";
+		}
+		
 		articleDao.updateArticle(draft);
 		return "redirect:/draft/list";
 	}
