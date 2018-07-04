@@ -25,7 +25,7 @@
 	<form:input type="text" path="content"/>
 	<form:errors path="content"/><br/>
 	Set to draft:
-	<form:radiobutton path="draft" value="true"/><br/>
+	<form:checkbox path="draft" value="true"/><br/>
 		
 	<input type="submit" value="save"/>
 </form:form>

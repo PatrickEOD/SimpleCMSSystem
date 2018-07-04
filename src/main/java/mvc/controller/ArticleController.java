@@ -2,6 +2,7 @@ package mvc.controller;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class ArticleController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("article", articleDao.readOnlyArticles());
+		model.addAttribute("article", articleDao.readOnlyArticles().toArray());
 		return "article/list";
 	}
 
@@ -85,6 +86,7 @@ public class ArticleController {
 		article.setUpdated(getActualDate());
 //		System.out.println("=========================" + article.getCreated());
 		articleDao.updateArticle(article);
+		System.out.println("========================================" + articleDao.readOnlyArticles().toString());
 		return "redirect:/article/list";
 	}
 

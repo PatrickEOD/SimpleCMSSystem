@@ -88,6 +88,7 @@ public class DraftController {
 		draft.setUpdated(getActualDate());
 		
 		if(!draft.isDraft()) {
+//			Article article = draft;
 			model.addAttribute("article", draft);
 			return "article/edit";
 		}
