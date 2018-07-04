@@ -21,6 +21,7 @@ import mvc.dao.CategoryDao;
 import mvc.entity.Article;
 import mvc.entity.Author;
 import mvc.entity.Category;
+import mvc.validators.article.ValidationGroupArticles;
 
 @Controller
 @RequestMapping("/article")
@@ -54,7 +55,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/add")
-	public String add(@Validated @ModelAttribute (name = "article") Article article, BindingResult result) {
+	public String add(@Validated({ValidationGroupArticles.class}) @ModelAttribute (name = "article") Article article, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/add";
 		}
@@ -77,7 +78,7 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@Validated @ModelAttribute (name = "article") Article article, BindingResult result) {
+	public String edit(@Validated({ValidationGroupArticles.class}) @ModelAttribute (name = "article") Article article, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/list";
 		}

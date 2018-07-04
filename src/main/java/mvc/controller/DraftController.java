@@ -2,7 +2,6 @@ package mvc.controller;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import mvc.dao.CategoryDao;
 import mvc.entity.Article;
 import mvc.entity.Author;
 import mvc.entity.Category;
+import mvc.validators.article.ValidationGroupDrafts;
 
 @Controller
 @RequestMapping("/draft")
@@ -57,7 +57,7 @@ public class DraftController {
 	}
 	
 	@PostMapping("/add")
-	public String add(@Validated @ModelAttribute (name = "draft") Article draft, BindingResult result) {
+	public String add(@Validated({ValidationGroupDrafts.class}) @ModelAttribute (name = "draft") Article draft, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/draft/add";
 		}
@@ -80,7 +80,7 @@ public class DraftController {
 	}
 	
 	@PostMapping("/edit")
-	public String edit(@Validated @ModelAttribute (name = "draft") Article draft, BindingResult result) {
+	public String edit(@Validated({ValidationGroupDrafts.class}) @ModelAttribute (name = "draft") Article draft, BindingResult result) {
 		if(result.hasErrors()) {
 			return "article/draft/list";
 		}
