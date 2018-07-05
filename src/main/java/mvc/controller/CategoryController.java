@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import mvc.dao.CategoryDao;
 import mvc.entity.Category;
+import mvc.repositories.CategoryRepository;
 
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
 
 	private final CategoryDao categoryDao;
+	private final CategoryRepository categoryRepository;
 	
 	@Autowired
-	public CategoryController(CategoryDao categoryDao) {
+	public CategoryController(CategoryDao categoryDao, CategoryRepository categoryRepository) {
 		this.categoryDao = categoryDao;
+		this.categoryRepository = categoryRepository;
 	}
 	
 	@GetMapping("/add")
@@ -36,19 +39,22 @@ public class CategoryController {
 		if(result.hasErrors()) {
 			return "category/add";
 		}
-		categoryDao.createCategory(category);
+//		categoryDao.createCategory(category);
+		categoryRepository.save(category);
 		return "redirect:/category/list";
 	}
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("category", categoryDao.readAllCategories());
+//		model.addAttribute("category", categoryDao.readAllCategories());
+		model.addAttribute("category", categoryRepository.findAll());
 		return "category/list";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable long id) {
-		Category category = categoryDao.readCategory(id);
+//		Category category = categoryDao.readCategory(id);
+		Category category = categoryRepository.findOne(id);
 		model.addAttribute("category", category);
 		return "category/edit";
 	}
@@ -58,13 +64,15 @@ public class CategoryController {
 		if(result.hasErrors()) {
 			return "category/list";
 		}
-		categoryDao.updateCategory(category);
+//		categoryDao.updateCategory(category);
+		categoryRepository.save(category);
 		return "redirect:/category/list";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable long id) {
-		categoryDao.deleteCategory(categoryDao.readCategory(id));
+//		categoryDao.deleteCategory(categoryDao.readCategory(id));
+		categoryRepository.delete(categoryRepository.findOne(id));
 		return "redirect:/category/list";
 	}
 	
