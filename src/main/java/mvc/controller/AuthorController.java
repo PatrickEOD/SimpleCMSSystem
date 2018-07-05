@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import mvc.dao.AuthorDao;
 import mvc.entity.Author;
+import mvc.repositories.AuthorRepository;
 
 @Controller
 @RequestMapping("/author")
 public class AuthorController {
 
 	private final AuthorDao authorDao;
+	private final AuthorRepository authorRepository;
 	
 	@Autowired
-	public AuthorController(AuthorDao authorDao) {
+	public AuthorController(AuthorDao authorDao, AuthorRepository authorRepository) {
 		this.authorDao = authorDao;
+		this.authorRepository = authorRepository;
 	}
 	
 	@GetMapping("/add")
@@ -36,19 +39,22 @@ public class AuthorController {
 		if(result.hasErrors()) {
 			return "author/add";
 		}
-		authorDao.createAuthor(author);
+		authorRepository.save(author);
+//		authorDao.createAuthor(author);
 		return "redirect:/author/list";
 	}
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("author", authorDao.readAllAuthors());
+//		model.addAttribute("author", authorDao.readAllAuthors());
+		model.addAttribute("author", authorRepository.findAll());
 		return "author/list";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable Long id) {
-		model.addAttribute("author", authorDao.readAuthor(id));
+//		model.addAttribute("author", authorDao.readAuthor(id));
+		model.addAttribute("author", authorRepository.findOne(id));
 		return "author/edit";
 	}
 	
@@ -57,13 +63,15 @@ public class AuthorController {
 		if(result.hasErrors()) {
 			return "author/list";
 		}
-		authorDao.updateAuthor(author);
+//		authorDao.updateAuthor(author);
+		authorRepository.save(author);
 		return "redirect:/author/list";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id) {
-		authorDao.deleteAuthor(authorDao.readAuthor(id));
+//		authorDao.deleteAuthor(authorDao.readAuthor(id));
+		authorRepository.delete(authorRepository.findOne(id));
 		return "redirect:/author/list";
 	}
 	
