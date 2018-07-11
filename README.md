@@ -9,6 +9,6 @@
 
 | Test header | test header |
 | ----------- | ----------- |
-| row 1 | [ ] conten1 [x] content2 |
-| row 2 | [ ] content1 <br/> [x] content 2 |
+| row 1 | - [ ] conten1 - [x] content2 |
+| row 2 | - [ ] content1 <br/> - [x] content 2 |
 
